@@ -9,25 +9,29 @@ export default class Scene extends Component {
   }
 
   render() {
-    let {scene, catalog} = this.props;
-    let {height, layers} = scene;
+    let { scene, catalog } = this.props;
+    let { height, layers } = scene;
     let selectedLayer = layers.get(scene.selectedLayer);
 
+    console.log('background', scene.background);
     return (
       <g>
-        <Grids scene={scene}/>
-
-        <g style={{pointerEvents: 'none'}}>
+        <Grids scene={scene} />
+        <svg
+          width={scene.width}
+          height={scene.height}
+          dangerouslySetInnerHTML={{ __html: `<image id="img1" width="${scene.width}" height="${scene.height}" xlink: href="${scene.background}"></image>` }} />
+        <g style={{ pointerEvents: 'none' }}>
           {
             layers
-            .entrySeq()
-            .filter(([layerID, layer]) => layerID !== scene.selectedLayer && layer.visible)
-            .map(([layerID, layer]) => <Layer key={layerID} layer={layer} scene={scene} catalog={catalog}/>)
+              .entrySeq()
+              .filter(([layerID, layer]) => layerID !== scene.selectedLayer && layer.visible)
+              .map(([layerID, layer]) => <Layer key={layerID} layer={layer} scene={scene} catalog={catalog} />)
           }
         </g>
 
-        <Layer key={selectedLayer.id} layer={selectedLayer} scene={scene} catalog={catalog}/>
-      </g>
+        <Layer key={selectedLayer.id} layer={selectedLayer} scene={scene} catalog={catalog} />
+      </g >
     );
   }
 }

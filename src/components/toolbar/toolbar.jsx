@@ -11,9 +11,11 @@ import {
   MODE_3D_VIEW,
   MODE_3D_FIRST_PERSON,
   MODE_VIEWING_CATALOG,
-  MODE_CONFIGURING_PROJECT
+  MODE_CONFIGURING_PROJECT,
+  MODE_SETTING_BACKGROUND
 } from "../../constants";
 import * as SharedStyle from "../../shared-style";
+import ToolbarPdfLoadButton from "./toolbar-pdf-load-button";
 
 const iconTextStyle = {
   fontSize: "19px",
@@ -178,13 +180,18 @@ export default class Toolbar extends Component {
         condition: true,
         dom: (
           <ToolbarButton
-            active={[MODE_CONFIGURING_PROJECT].includes(mode)}
+            active={[MODE_SETTING_BACKGROUND].includes(mode)}
             tooltip={translator.t("Configure project")}
             onClick={event => projectActions.openProjectConfigurator()}
           >
             <MdSettings />
           </ToolbarButton>
         )
+      },
+      {
+        index: 9,
+        condition: allowProjectFileSupport,
+        dom: <ToolbarPdfLoadButton state={state} />
       }
     ];
 

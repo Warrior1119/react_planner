@@ -1,6 +1,6 @@
-import {Record, List, Map, fromJS} from 'immutable';
-import {MODE_IDLE} from './constants';
-import {SNAP_MASK} from './utils/snap';
+import { Record, List, Map, fromJS } from 'immutable';
+import { MODE_IDLE } from './constants';
+import { SNAP_MASK } from './utils/snap';
 
 let safeLoadMapList = (mapList, Model, defaultMap) => {
   return mapList
@@ -195,7 +195,7 @@ export class Group extends Record({
 
 
 export const DefaultLayers = new Map({
-  'layer-1': new Layer({id: 'layer-1', name: 'default'})
+  'layer-1': new Layer({ id: 'layer-1', name: 'default' })
 });
 
 
@@ -208,7 +208,8 @@ export class Scene extends Record({
   width: 3000,
   height: 2000,
   meta: new Map(),   //additional info
-  guides: new Map()
+  guides: new Map(),
+  background: ''
 }, 'Scene') {
   constructor(json = {}) {
     let layers = safeLoadMapList(json.layers, Layer, DefaultLayers);
@@ -264,16 +265,16 @@ export class Catalog extends Record({
 
     switch (element.prototype) {
       case 'lines':
-        return new Line(options).merge({properties});
+        return new Line(options).merge({ properties });
 
       case 'holes':
-        return new Hole(options).merge({properties});
+        return new Hole(options).merge({ properties });
 
       case 'areas':
-        return new Area(options).merge({properties});
+        return new Area(options).merge({ properties });
 
       case 'items':
-        return new Item(options).merge({properties});
+        return new Item(options).merge({ properties });
 
       default:
         throw new Error('prototype not valid');
@@ -285,12 +286,12 @@ export class HistoryStructure extends Record({
   list: new List(),
   first: null,
   last: null
-}, 'HistoryStructure' ){
-  constructor( json = {} ){
+}, 'HistoryStructure') {
+  constructor(json = {}) {
     super({
-      list: fromJS( json.list || [] ),
-      first: new Scene( json.scene ),
-      last: new Scene( json.last || json.scene )
+      list: fromJS(json.list || []),
+      first: new Scene(json.scene),
+      last: new Scene(json.last || json.scene)
     });
   }
 }
@@ -301,7 +302,7 @@ export class State extends Record({
   sceneHistory: new HistoryStructure(),
   catalog: new Catalog(),
   viewer2D: new Map(),
-  mouse: new Map({x: 0, y: 0}),
+  mouse: new Map({ x: 0, y: 0 }),
   zoom: 0,
   snapMask: SNAP_MASK,
   snapElements: new List(),

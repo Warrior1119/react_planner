@@ -168,7 +168,7 @@ export function initCatalog(catalog) {
   };
 }
 
-export function updateMouseCoord(coords = {x, y}) {
+export function updateMouseCoord(coords = { x, y }) {
   return {
     type: UPDATE_MOUSE_COORDS,
     coords
@@ -216,7 +216,7 @@ export function pasteProperties() {
   };
 }
 
-export function pushLastSelectedCatalogElementToHistory( element ) {
+export function pushLastSelectedCatalogElementToHistory(element) {
   return {
     type: PUSH_LAST_SELECTED_CATALOG_ELEMENT_TO_HISTORY,
     element
@@ -229,28 +229,28 @@ export function setAlterateState() {
   };
 }
 
-export function setMode( mode ) {
+export function setMode(mode) {
   return {
     type: SET_MODE,
     mode
   };
 }
 
-export function addHorizontalGuide( coordinate ) {
+export function addHorizontalGuide(coordinate) {
   return {
     type: ADD_HORIZONTAL_GUIDE,
     coordinate
   };
 }
 
-export function addVerticalGuide( coordinate ) {
+export function addVerticalGuide(coordinate) {
   return {
     type: ADD_VERTICAL_GUIDE,
     coordinate
   };
 }
 
-export function addCircularGuide( x, y, radius ) {
+export function addCircularGuide(x, y, radius) {
   return {
     type: ADD_CIRCULAR_GUIDE,
     x,
@@ -258,21 +258,21 @@ export function addCircularGuide( x, y, radius ) {
     radius
   };
 }
-export function removeHorizontalGuide( guideID ) {
+export function removeHorizontalGuide(guideID) {
   return {
     type: REMOVE_HORIZONTAL_GUIDE,
     guideID
   };
 }
 
-export function removeVerticalGuide( guideID ) {
+export function removeVerticalGuide(guideID) {
   return {
     type: REMOVE_VERTICAL_GUIDE,
     guideID
   };
 }
 
-export function removeCircularGuide( guideID ) {
+export function removeCircularGuide(guideID) {
   return {
     type: REMOVE_CIRCULAR_GUIDE,
     guideID

@@ -6,7 +6,7 @@ export function browserDownload(json) {
   if (!filename) return;
 
   let output = JSON.stringify(json);
-  let data = new Blob([output], {type: 'text/plain'});
+  let data = new Blob([output], { type: 'text/plain' });
   let url = window.URL.createObjectURL(data);
   fileOutputLink.setAttribute('download', filename);
   fileOutputLink.href = url;
@@ -30,6 +30,25 @@ export function browserUpload() {
         resolve(loadedData);
       });
       reader.readAsText(file);
+    });
+
+    fileInput.click();
+  });
+}
+
+export function browserPDFupload() {
+  return new Promise(function (resolve, reject) {
+    let fileInput = document.createElement('input');
+    fileInput.type = 'file';
+
+    fileInput.addEventListener('change', function (event) {
+      let file = event.target.files[0];
+      let reader = new FileReader();
+      reader.addEventListener('load', (fileEvent) => {
+        let loadedData = fileEvent.target.result;
+        resolve(loadedData);
+      });
+      reader.readAsDataURL(file);
     });
 
     fileInput.click();
